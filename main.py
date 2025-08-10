@@ -159,8 +159,8 @@ def main():
             if firi_usd and coingecko_usd:
                 proceeds_firi = sell_amount_crypto * firi_usd
                 proceeds_cg = sell_amount_crypto * coingecko_usd
-                proceeds_ask = sell_amount_crypto * result['Asking'] if result['Asking'] is not None else None
-                proceeds_bid = sell_amount_crypto * result['Bid'] if result['Bid'] is not None else None
+                proceeds_ask = 1 * result['Asking'] if result['Asking'] is not None else None
+                proceeds_bid = 1 * result['Bid'] if result['Bid'] is not None else None
                 diff = proceeds_firi - proceeds_cg
                 winner = "Firi" if diff > 0 else ("CoinGecko" if diff < 0 else "Same")
 
@@ -183,8 +183,8 @@ def main():
                 with colA:
                     st.markdown(f"<div class='proceeds-box {'winner' if winner=='Firi' else 'loser' if winner=='CoinGecko' else 'neutral'}'>"
                                 f"<b>Firi Market Price</b><br>"
-                                f"<b>USD:</b> {proceeds_firi:.2f}<br>"
-                                f"<b>NOK:</b> {proceeds_firi / result['NOK→USD rate']:.2f}"
+                                f"<b>NOK:</b> {proceeds_firi / result['NOK→USD rate']:.2f}<br>"
+                                f"<b>USD:</b> {proceeds_firi:.2f}"
                                 "</div>", unsafe_allow_html=True)
                     if proceeds_ask is not None:
                         st.markdown(f"<div class='proceeds-box neutral'>"
@@ -201,8 +201,18 @@ def main():
                 with colB:
                     st.markdown(f"<div class='proceeds-box {'winner' if winner=='CoinGecko' else 'loser' if winner=='Firi' else 'neutral'}'>"
                                 f"<b>CoinGecko Price</b><br>"
-                                f"<b>USD:</b> {proceeds_cg:.2f}<br>"
-                                f"<b>NOK:</b> {proceeds_cg / result['NOK→USD rate']:.2f}"
+                                f"<b>NOK:</b> {proceeds_cg / result['NOK→USD rate']:.2f}<br>"
+                                f"<b>USD:</b> {proceeds_cg:.2f}"
+                                "</div>", unsafe_allow_html=True)
+                    st.markdown(f"<div class='proceeds-box neutral'>"
+                                f"<b>CoinGecko USD Price</b><br>"
+                                f"<b>NOK:</b> {coingecko_usd / result['NOK→USD rate']:.2f}<br>"
+                                f"<b>USD:</b> {coingecko_usd:.2f}"
+                                "</div>", unsafe_allow_html=True)
+                    st.markdown(f"<div class='proceeds-box {'winner' if winner=='Same' else 'neutral'}'>"
+                                f"<b>Difference</b><br>"
+                                f"<b>NOK:</b> {abs(diff / result['NOK→USD rate']):.2f}<br>"
+                                f"<b>USD:</b> {abs(diff):.2f}"
                                 "</div>", unsafe_allow_html=True)
 
                 if winner == "Same":
