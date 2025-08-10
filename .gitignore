@@ -1,0 +1,25 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+venv/
+.env/
+.envrc
+.venv/
+
+# OS files
+.DS_Store
+
+# Streamlit cache
+.streamlit/
+
+# Data files
+*.json
+
+# VSCode
+.vscode/
+
+# Nix
+shell.nix
