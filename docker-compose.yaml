@@ -1,0 +1,12 @@
+services:
+  firi-app:
+    build: .
+    container_name: firi-tracker
+    ports:
+      - "8501:8501"
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - .:/app
+    command: streamlit run main.py --server.port=8501 --server.address=0.0.0.0
+
